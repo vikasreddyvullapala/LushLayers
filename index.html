@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lush Layers | Artisan Coffee & Patisserie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Marcellus&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Hide scrollbar for all elements */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        * {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a1a;
+            --primary-light: #f8f5f0;
+            --accent: #9a7e5c;
+            --accent-light: #c4ad8a;
+            --text-dark: #2d2d2d;
+            --text-light: #6d6d6d;
+            --gold: #d4af37;
+            --rose: #e8c4c4;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .marcellus {
+            font-family: 'Marcellus', serif;
+        }
+
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Enhanced Button Styles - More Elegant and Premium */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        .btn:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        .btn:hover:after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-light {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-light:hover {
+            background-color: white;
+            color: var(--primary-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 80px 0 50px;
+            font-size: 48px;
+            font-weight: 300;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.5s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+            margin: 20px auto;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--text-light);
+            font-family: 'Playfair Display', serif;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.5s ease 0.3s;
+        }
+
+        .quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Styles - Navbar within images */
+        header {
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 25px 0;
+            transition: all 0.4s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 500;
+            color: white;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .logo:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--gold);
+            transform: scaleX(0.7);
+            transform-origin: center;
+        }
+
+        .logo span {
+            font-weight: 300;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 25px;
+            font-weight: 400;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            color: white;
+        }
+
+        nav ul li:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        nav ul li:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Carousel Section - FIXED CONTINUOUS SCROLLING */
+        .hero-carousel {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            width: 300%;
+            transition: transform 1.2s ease;
+        }
+
+        .carousel-slide {
+            width: 33.333%;
+            height: 100%;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .slide-content h1 {
+            font-size: 76px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.5s ease 0.5s forwards;
+            font-family: 'Cinzel', serif;
+        }
+
+        .slide-content p {
+            font-size: 22px;
+            margin-bottom: 50px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.5s ease 0.8s forwards;
+        }
+
+        .slide-content .btn {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.5s ease 1.1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* Featured Products - Reduced Image Size */
+        .products-section {
+            padding: 80px 0 60px;
+            background: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') no-repeat center center/cover fixed;
+            position: relative;
+            color: white;
+        }
+
+        .products-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+
+        .products-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .products-section .section-title,
+        .products-section .quote {
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+            position: relative;
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-image {
+            height: 280px; /* Reduced from 400px */
+            background-color: #f5f5f5;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: clip-path 1.8s ease;
+        }
+
+        .product-card.visible .product-image {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.8s ease;
+            transform: scale(1.1);
+        }
+
+        .product-card.visible .product-image img {
+            transform: scale(1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Hover description overlay - positioned at bottom */
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-overlay-content {
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-overlay-content {
+            transform: translateY(0);
+        }
+
+        .product-overlay-content p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .product-name {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 20px;
+            font-family: 'Cinzel', serif;
+            color: white;
+        }
+
+        .product-origin {
+            color: var(--gold);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .product-price {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Signature Dishes Section - NEW POSITION (before Process) */
+        .signature-dishes {
+            padding: 80px 0 60px;
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover fixed;
+            position: relative;
+            color: white;
+        }
+
+        .signature-dishes:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+
+        .signature-dishes .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .signature-dishes .section-title,
+        .signature-dishes .quote {
+            color: white;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .dish-card {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+            position: relative;
+        }
+
+        .dish-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dish-image {
+            height: 280px;
+            background-color: #f5f5f5;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: clip-path 1.8s ease;
+        }
+
+        .dish-card.visible .dish-image {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.8s ease;
+            transform: scale(1.1);
+        }
+
+        .dish-card.visible .dish-image img {
+            transform: scale(1);
+        }
+
+        .dish-card:hover .dish-image img {
+            transform: scale(1.05);
+        }
+
+        .dish-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .dish-card:hover .dish-overlay {
+            opacity: 1;
+        }
+
+        .dish-overlay-content {
+            color: white;
+            transform: translateY(20px);
+            transition: transform 0.6s ease;
+        }
+
+        .dish-card:hover .dish-overlay-content {
+            transform: translateY(0);
+        }
+
+        .dish-overlay-content p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .dish-name {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 20px;
+            font-family: 'Cinzel', serif;
+            color: white;
+        }
+
+        .dish-category {
+            color: var(--gold);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .dish-price {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Process Section - NEW POSITION (after Signature Dishes) */
+        .process {
+            background-color: rgba(26, 26, 26, 0.9);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover fixed;
+        }
+
+        .process:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1;
+        }
+
+        .process .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+        }
+
+        .process-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-icon {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .process-step h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .process-step p {
+            color: #ccc;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* Patisserie Section */
+        .patisserie-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1577303935007-0d306ee638cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2040&q=80') no-repeat center center/cover fixed;
+            color: white;
+        }
+
+        .patisserie-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+
+        .patisserie-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .patisserie-section .section-title,
+        .patisserie-section .quote {
+            color: white;
+        }
+
+        .patisserie-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+
+        .patisserie-content {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1.5s ease;
+        }
+
+        .patisserie-content.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .patisserie-content h2 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .patisserie-content p {
+            margin-bottom: 25px;
+            color: #ddd;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .patisserie-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1.5s ease 0.4s;
+        }
+
+        .patisserie-images.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .patisserie-img {
+            height: 200px; /* Reduced from 250px */
+            background-color: #f5f5f5;
+            overflow: hidden;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: clip-path 1.2s ease;
+        }
+
+        .patisserie-images.visible .patisserie-img {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .patisserie-img:nth-child(1) {
+            transition-delay: 0.2s;
+        }
+        .patisserie-img:nth-child(2) {
+            transition-delay: 0.4s;
+        }
+        .patisserie-img:nth-child(3) {
+            transition-delay: 0.6s;
+        }
+        .patisserie-img:nth-child(4) {
+            transition-delay: 0.8s;
+        }
+
+        .patisserie-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+
+        .patisserie-img:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Coffee Club - WITH TEXT ANIMATIONS */
+        .coffee-club {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover fixed;
+            color: white;
+        }
+
+        .coffee-club:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1;
+        }
+
+        .coffee-club .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .coffee-club h2 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease;
+        }
+
+        .coffee-club h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coffee-club p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #ddd;
+            font-size: 20px;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease 0.3s;
+        }
+
+        .coffee-club p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coffee-club .btn {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease 0.6s;
+        }
+
+        .coffee-club .btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(26, 26, 26, 0.95);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80') no-repeat center center/cover fixed;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1;
+        }
+
+        footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 1px;
+            background-color: var(--gold);
+        }
+
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            color: #aaa;
+            transition: color 0.3s ease;
+            font-size: 16px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .newsletter p {
+            color: #aaa;
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            background-color: rgba(42, 42, 42, 0.7);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+        }
+
+        .newsletter-form button {
+            padding: 0 25px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-light);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            color: #aaa;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #777;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .patisserie-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dishes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .dishes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide-content h1 {
+                font-size: 56px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0,0,0,0.9);
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                padding: 30px 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                padding: 15px 25px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .slide-content h1 {
+                font-size: 42px;
+            }
+            
+            .slide-content p {
+                font-size: 18px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .patisserie-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Carousel -->
+    <section class="hero-carousel">
+        <!-- Header with navbar within images -->
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">LUSH <span>LAYERS</span></div>
+                    <nav>
+                        <div class="mobile-menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <ul>
+                            <li><a href="#collections">Collections</a></li>
+                            <li><a href="#patisserie">Patisserie</a></li>
+                            <li><a href="#coffee-club">Coffee Club</a></li>
+                            <li><a href="#signature-dishes">Signature Dishes</a></li>
+                            <li><a href="#process">Our Process</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Carousel -->
+        <div class="carousel-track">
+            <!-- Slide 1 -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Coffee Experience">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>ARTISAN COFFEE & PATISSERIE</h1>
+                    <p>"Where the richness of coffee meets the delicacy of French patisserie in perfect harmony."</p>
+                    <a href="#collections" class="btn btn-light">Discover Our Collections</a>
+                </div>
+            </div>
+            
+            <!-- Slide 2 - NEW IMAGE -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Coffee Roasting">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>MONARCH ESPRESSO BLEND</h1>
+                    <p>"A carefully balanced blend with notes of dark chocolate, caramel, and a hint of citrus."</p>
+                    <a href="#collections" class="btn btn-light">Explore Our Coffee</a>
+                </div>
+            </div>
+            
+            <!-- Slide 3 - NEW IMAGE -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Coffee Beans">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1>ARTISAN PATISSERIE</h1>
+                    <p>"French techniques meet seasonal ingredients in our delicate, flavorful desserts."</p>
+                    <a href="#patisserie" class="btn btn-light">Discover Our Pastries</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator only - No carousel dots -->
+        <div class="scroll-indicator">Scroll to Explore</div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="collections" class="products-section">
+        <div class="container">
+            <h2 class="section-title">COFFEE COLLECTIONS</h2>
+            <p class="quote">"From the highlands of Ethiopia to the mountains of Colombia, each bean tells a story of terroir and craftsmanship."</p>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1587734195503-904fca47e0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ethiopian Coffee">
+                        <div class="product-overlay">
+                            <div class="product-overlay-content">
+                                <p>A delicate floral aroma with notes of bergamot, jasmine, and ripe stone fruits.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-name">Ethiopia Banko Fuafuate</h3>
+                    <p class="product-origin">Yirgacheffe, Ethiopia</p>
+                    <p class="product-price">From ₹1,800</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- NEW DIFFERENT IMAGE -->
+                        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2061&q=80" alt="Colombian Coffee">
+                        <div class="product-overlay">
+                            <div class="product-overlay-content">
+                                <p>Rich chocolate undertones with bright acidity and hints of cherry and caramel.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-name">Colombia La Serena</h3>
+                    <p class="product-origin">Huila, Colombia</p>
+                    <p class="product-price">From ₹2,000</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <!-- NEW DIFFERENT IMAGE -->
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Guatemalan Coffee">
+                        <div class="product-overlay">
+                            <div class="product-overlay-content">
+                                <p>Complex layers of dark chocolate, toasted nuts, and a subtle citrus finish.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-name">Guatemala El Socorro</h3>
+                    <p class="product-origin">Antigua, Guatemala</p>
+                    <p class="product-price">From ₹1,900</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patisserie Section -->
+    <section id="patisserie" class="patisserie-section">
+        <div class="container">
+            <div class="patisserie-grid">
+                <div class="patisserie-content">
+                    <h2 class="section-title">ARTISAN PATISSERIE</h2>
+                    <p>Our pastry chefs combine French techniques with seasonal ingredients to create delicate, flavorful desserts that complement our coffee selections.</p>
+                    <p>Each creation is a work of art, from our signature layered cakes to our delicate viennoiseries, all made in-house daily.</p>
+                    <a href="#" class="btn">Explore Our Pastries</a>
+                </div>
+                <div class="patisserie-images">
+                    <div class="patisserie-img">
+                        <img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Pastry">
+                    </div>
+                    <div class="patisserie-img">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Cake">
+                    </div>
+                    <div class="patisserie-img">
+                        <!-- NEW THIRD IMAGE -->
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1989&q=80" alt="Chocolate Cake">
+                    </div>
+                    <div class="patisserie-img">
+                        <img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Pastry">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coffee Club - WITH TEXT ANIMATIONS -->
+    <section id="coffee-club" class="coffee-club">
+        <div class="container">
+            <h2>THE LUSH LAYERS CLUB</h2>
+            <p>"A curated journey through the world's finest coffee regions and artisanal patisserie, delivered to your doorstep each month."</p>
+            <a href="#" class="btn">Explore Membership</a>
+        </div>
+    </section>
+
+    <!-- Signature Dishes Section - NOW BEFORE PROCESS SECTION -->
+    <section id="signature-dishes" class="signature-dishes">
+        <div class="container">
+            <h2 class="section-title">SIGNATURE DISHES</h2>
+            <p class="quote">"Where culinary artistry meets exceptional flavor in every creation."</p>
+            <div class="dishes-grid">
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80" alt="Truffle Croissant">
+                        <div class="dish-overlay">
+                            <div class="dish-overlay-content">
+                                <p>Flaky butter croissant filled with wild mushrooms, truffle oil, and aged gruyère cheese.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="dish-name">TRUFFLE MUSHROOM CROISSANT</h3>
+                    <p class="dish-category">Savory Pastry</p>
+                    <p class="dish-price">₹1,350</p>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1989&q=80" alt="Layered Chocolate">
+                        <div class="dish-overlay">
+                            <div class="dish-overlay-content">
+                                <p>Seven layers of chocolate mousse, ganache, and almond sponge with gold leaf garnish.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="dish-name">LAYERED CHOCOLATE DELIGHT</h3>
+                    <p class="dish-category">Dessert</p>
+                    <p class="dish-price">₹2,200</p>
+                </div>
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <!-- FIXED THIRD IMAGE - NOW VISIBLE -->
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80" alt="Truffle Croissant">
+                        <div class="dish-overlay">
+                            <div class="dish-overlay-content">
+                                <p>Choux pastry filled with rose-infused cream and topped with crushed pistachios.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="dish-name">ROSE & PISTACHIO ÉCLAIR</h3>
+                    <p class="dish-category">French Pastry</p>
+                    <p class="dish-price">₹1,475</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section - NOW AFTER SIGNATURE DISHES -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">OUR CRAFT</h2>
+            <p class="quote">"Precision in process, artistry in execution—the foundation of exceptional coffee and patisserie."</p>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>TERROIR SELECTION</h3>
+                    <p>We journey to coffee's origin, forging relationships with farmers who share our commitment to sustainable practices and exceptional quality.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>PRECISION ROASTING</h3>
+                    <p>Our small-batch roasting approach allows for meticulous control over development time and temperature to highlight inherent bean qualities.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-wine-glass-alt"></i>
+                    </div>
+                    <h3>PASTRY CRAFT</h3>
+                    <p>Our pastry chefs combine French techniques with seasonal, locally-sourced ingredients to create visually stunning and flavorful desserts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Collections</h3>
+                    <ul>
+                        <li><a href="#collections">Single Origin Coffee</a></li>
+                        <li><a href="#collections">Signature Blends</a></li>
+                        <li><a href="#patisserie">Artisan Pastries</a></li>
+                        <li><a href="#patisserie">Seasonal Cakes</a></li>
+                        <li><a href="#signature-dishes">Signature Dishes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Experience</h3>
+                    <ul>
+                        <li><a href="#">Tasting Events</a></li>
+                        <li><a href="#">Brewing Guides</a></li>
+                        <li><a href="#coffee-club">Coffee Club</a></li>
+                        <li><a href="#signature-dishes">Signature Dishes</a></li>
+                        <li><a href="#">Private Tastings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Story</h3>
+                    <ul>
+                        <li><a href="#process">Philosophy</a></li>
+                        <li><a href="#process">Sustainability</a></li>
+                        <li><a href="#">Journal</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <div class="newsletter">
+                        <h3>Join Our Journey</h3>
+                        <p>Receive exclusive insights into our latest collections, brewing techniques, and invitations to private tasting events.</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Lush Layers Artisan Coffee & Patisserie. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // Carousel functionality - FIXED CONTINUOUS SCROLLING
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = Array.from(track.children);
+            
+            let currentSlide = 0;
+            let autoSlideInterval;
+            
+            // Move to target slide
+            const moveToSlide = (targetIndex) => {
+                // Calculate the transform value based on slide width
+                const slideWidth = 100 / slides.length; // Percentage width of each slide
+                const transformValue = -targetIndex * (100 / 3); // Move by 33.333% for each slide
+                
+                track.style.transform = `translateX(${transformValue}%)`;
+                currentSlide = targetIndex;
+            };
+            
+            // Next slide
+            const nextSlide = () => {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                moveToSlide(nextIndex);
+            };
+            
+            // Auto slide - every 2 seconds as requested
+            const startAutoSlide = () => {
+                autoSlideInterval = setInterval(nextSlide, 4500);
+            };
+            
+            const stopAutoSlide = () => {
+                clearInterval(autoSlideInterval);
+            };
+            
+            // Start auto sliding
+            startAutoSlide();
+            
+            // Pause auto slide on hover
+            const carouselContainer = document.querySelector('.hero-carousel');
+        });
+
+        // Scroll animation with Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatableElements = document.querySelectorAll('.section-title, .quote, .product-card, .process-step, .dish-card, .patisserie-content, .patisserie-images, .patisserie-img, .coffee-club h2, .coffee-club p, .coffee-club .btn');
+            
+            animatableElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
